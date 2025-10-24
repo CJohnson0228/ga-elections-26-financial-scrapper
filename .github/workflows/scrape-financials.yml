@@ -45,6 +45,9 @@ jobs:
           cd scraper
           pip install -r requirements.txt
 
+      - name: Clean old chromedriver cache
+        run: rm -rf ~/.cache/selenium /opt/hostedtoolcache/Python/*/x64/lib/python*/site-packages/chromedriver_autoinstaller/*
+
       - name: Run scraper
         env:
           DATA_REPO_PATH: ${{ github.workspace }}/data-repo
