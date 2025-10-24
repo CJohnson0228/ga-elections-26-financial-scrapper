@@ -30,17 +30,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Firefox
+      - name: Install Chrome and ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox
-
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux64.tar.gz
-          tar -xzf geckodriver-v0.35.0-linux64.tar.gz
-          chmod +x geckodriver
-          sudo mv geckodriver /usr/local/bin/
-          which geckodriver
-          geckodriver --version
+          sudo apt-get install -y chromium-browser chromium-chromedriver
 
       - name: Install Python dependencies
         run: |

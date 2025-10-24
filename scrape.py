@@ -1,7 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 import json
 import time
@@ -12,16 +11,13 @@ def scrape_race(url, race_name):
     """Scrape a single race and return candidate data"""
     print(f"\nScraping {race_name}...")
     
-    # Set up Firefox
-    firefox_options = Options()
-    firefox_options.add_argument('--headless')
-    firefox_options.add_argument('--no-sandbox')  # Add this
-    firefox_options.add_argument('--disable-dev-shm-usage')  # Add this
+    # Set up Chrome (changed from Firefox)
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
     
-    driver = webdriver.Firefox(
-        service=Service(GeckoDriverManager().install()),
-        options=firefox_options
-    )
+    driver = webdriver.Chrome(options=chrome_options)
     
     try:
         # Navigate and wait
