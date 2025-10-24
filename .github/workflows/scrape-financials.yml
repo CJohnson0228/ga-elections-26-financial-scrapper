@@ -1,12 +1,12 @@
+# TransparencyUSA Financial Data Scraper
 name: Scrape TransparencyUSA Financial Data
-
 on:
   # Run daily at 2 AM UTC (9 PM EST)
   schedule:
     - cron: "0 2 * * *"
-
   # Allow manual triggering
   workflow_dispatch:
+# ... rest stays the same
 
 jobs:
   scrape:
