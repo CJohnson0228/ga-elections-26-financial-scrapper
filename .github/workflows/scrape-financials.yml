@@ -30,10 +30,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Firefox and GeckoDriver
+      - name: Install Firefox
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox firefox-geckodriver
+          sudo apt-get install -y firefox
 
       - name: Install Python dependencies
         run: |

@@ -15,6 +15,8 @@ def scrape_race(url, race_name):
     # Set up Firefox
     firefox_options = Options()
     firefox_options.add_argument('--headless')
+    firefox_options.add_argument('--no-sandbox')  # Add this
+    firefox_options.add_argument('--disable-dev-shm-usage')  # Add this
     
     driver = webdriver.Firefox(
         service=Service(GeckoDriverManager().install()),
