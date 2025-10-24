@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# WebDriver
+geckodriver.log
+
+# Data folder (we don't commit test data)
+data/
+
+# Environment variables
+.env
