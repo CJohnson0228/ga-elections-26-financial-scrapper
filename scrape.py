@@ -1,5 +1,6 @@
 from selenium import webdriver
 import chromedriver_autoinstaller
+print("Using chromedriver_autoinstaller from:", chromedriver_autoinstaller.__file__)
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup

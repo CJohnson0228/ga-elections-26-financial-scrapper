@@ -43,6 +43,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           cd scraper
+          pip install -U pip
           pip install -r requirements.txt
 
       - name: Clean old chromedriver cache
