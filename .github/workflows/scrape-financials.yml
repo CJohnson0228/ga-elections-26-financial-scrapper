@@ -33,7 +33,12 @@ jobs:
       - name: Install Chrome and ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
+          sudo apt-get install -y chromium-browser
+
+      - name: Check Chrome and Chromedriver versions
+        run: |
+          chromium-browser --version
+          chromedriver --version || echo "chromedriver not yet installed"
 
       - name: Install Python dependencies
         run: |

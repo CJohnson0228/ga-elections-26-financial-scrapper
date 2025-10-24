@@ -16,7 +16,12 @@ def scrape_race(url, race_name):
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
-    
+
+    import chromedriver_autoinstaller
+    chromedriver_autoinstaller.install()
+
+    chrome_options.binary_location = "/usr/bin/chromium-browser"
+
     driver = webdriver.Chrome(options=chrome_options)
     
     try:
