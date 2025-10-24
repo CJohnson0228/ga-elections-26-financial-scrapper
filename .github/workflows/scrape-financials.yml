@@ -1,0 +1,58 @@
+name: Scrape TransparencyUSA Financial Data
+
+on:
+  # Run daily at 2 AM UTC (9 PM EST)
+  schedule:
+    - cron: "0 2 * * *"
+
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout scraper repo
+        uses: actions/checkout@v4
+        with:
+          path: scraper
+
+      - name: Checkout data repo
+        uses: actions/checkout@v4
+        with:
+          repository: CJohnson0228/georgia-2026-election-data
+          token: ${{ secrets.DATA_REPO_TOKEN }}
+          path: data-repo
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Firefox and GeckoDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
+
+      - name: Install Python dependencies
+        run: |
+          cd scraper
+          pip install -r requirements.txt
+
+      - name: Run scraper
+        env:
+          DATA_REPO_PATH: ${{ github.workspace }}/data-repo
+        run: |
+          cd scraper
+          python scrape.py
+
+      - name: Commit and push changes to data repo
+        run: |
+          cd data-repo
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add financials/state-financials.json
+          git add candidates/pending-candidates.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update financial data - $(date +'%Y-%m-%d %H:%M UTC')"
+          git push
